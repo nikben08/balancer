@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <title>Balancer</title>
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Balancer</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/dashboard/peers_manager">Peers Manager</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Domains</a>
+              </li>
+            </ul>
+            <span class="navbar-text">
+              Load Balancer Admin Panel
+            </span>
+          </div>
+        </div>
+    </nav>
+    
+    <main>
+        <div class="container">
+          <div class="row mt-2 add-addres-div">
+            <div class="col-md-7 left-side d-flex flex-column justify-content-center">
+              <p><h3>Etki Alanı</h3></p>  
+              <p>Web sitenizin çalışması, içeriğin alınması için en az bir adet etki alanı eklemeniz gerekmektedir</p>
+            </div>
+            <div class="col-md-5 right-side d-flex flex-column justify-content-center">
+              <button  id="addServerBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="fa-solid fa-plus fa-lg"></i> ekle</button>
+            </div>
+          </div>
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Yeni Etki Alanı</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">Etiket:</label>
+                      <input type="text" class="form-control" id="domainLabel">
+                    </div>
+                    <div class="mb-3" id="modal-error_box">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="createDomain" class="btn btn-primary">Ekle</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2 server_adress-header d-flex flex-column justify-content-center">
+            <div class="col-md-12">
+              <i class="fa-solid fa-globe" style="color: #bfc3ca;"></i> Etki Alanları
+            </div>
+          </div>
+          <div class="row server_adress-body">
+            <div class="row title">
+              <div class="col-md-10">
+                Etiket
+              </div>
+              <div class="col-md-2">
+                Action
+              </div>
+            </div>
+            {{range .domains}}
+              <div class="row mt-1">
+                <div class="col-md-10">
+                  <p><a href="#">{{.Label}}</a></p>
+                </div>
+                <div class="col-md-2">
+                  <p><button type="button" class="btn btn-primary"><i class="fa-solid fa-gear fa-sm" style="color: #ffffff;"></i></button> <button type="button" data-domain-id={{.Id}} class="btn btn-danger delete_domain-btn"><i class="fa-solid fa-trash fa-sm" style="color: #ffffff;"></i></button></p>
+                </div>
+              </div>
+            {{end}}
+          </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="dashboard.js"></script>
+    <script>
+      var exampleModal = document.getElementById('exampleModal')
+      exampleModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+      })
+    </script>
+  </body>
+</html>

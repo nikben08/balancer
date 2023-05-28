@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+.add-addres-div{
+    font-family: 'Roboto', sans-serif;;
+    font-size: 15px;
+    border-radius: 3px;
+    border: 2px solid #838587;
+    background-color: #FFFFFF;
+}
+
+.add-addres-div .left-side {
+    border: 2px solid #838587;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.add-addres-div .right-side {
+    background-color: #F8F9FB;
+    border: 2px solid #838587;
+}
+
+#addServerBtn{
+    width: 85px;
+    height: 45px;
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 3px;
+    background: #406BEB;
+    color: #FFFFFF;
+    border: none;
+    margin: 0 auto;
+}
+
+.server_adress-header { 
+    background-color: #24252A;
+    height: 35px;
+    border-radius: 5px 5px 0px 0px;
+    color: #F8F9FB;
+    font-family: 'Roboto', sans-serif;
+}
+
+.server_adress-body {
+    background-color: #F8F9FB;
+}
+
+.server_adress-body .title {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
