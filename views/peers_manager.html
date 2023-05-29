@@ -33,7 +33,7 @@
             <span class="navbar-text">
               <form action="peers_manager" method="post" id="selectDomainForm">
                 <select name="domain_id" class="form-select" id="domainSelect" aria-label="Default select example">
-                  <option selected>Select domain</option>
+                  <option value={{.selected_domain.Id}} selected>{{.selected_domain.Label}}</option>
                   {{range .domains}}
                     <option value={{.Id}}>{{.Label}}</option>
                   {{end}}
@@ -86,15 +86,6 @@
                         <option value="8">8</option>
                         <option value="9">9</option>
                         <option value="10">10</option>
-                      </select>
-                    </div>
-                    <div class="mb-3">
-                      <label for="recipient-name" class="col-form-label">Domain:</label>
-                      <select id="domainId" class="form-select" id="domainSelect" aria-label="Default select example">
-                        <option selected>{{.selected_domain.Label}}</option>
-                        {{range .domains}}
-                          <option value={{.Id}}>{{.Label}}</option>
-                        {{end}}
                       </select>
                     </div>
                     <div class="mb-3" id="modal-error_box">

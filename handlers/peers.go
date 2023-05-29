@@ -39,31 +39,21 @@ func PeersManagerDomain(c *fiber.Ctx) error {
 
 	domains, _ := services.GetAllDomains()
 	selectedDomain := models.Domain{}
-	if len(json.DomainId) == 0 {
-		if len(domains) == 0 {
-			return c.JSON(fiber.Map{
-				"code":    400,
-				"message": "Please, create at least 1 domain first.",
-				"error":   "No domains found",
-			})
-		}else{
-			for i := 0; i < len(domains); i++ {
-				if domains[i].Id.String() == json.DomainId {
-					selectedDomain.Id = domains[i].Id
-					selectedDomain.Label = domains[i].Label
+	
+	for i := 0; i < len(domains); i++ {
+		if domains[i].Id.String() == json.DomainId {
+			selectedDomain.Id = domains[i].Id
+			selectedDomain.Label = domains[i].Label
 
-					domains[i] = domains[len(domains) - 1]
-					domains = domains[:len(domains)-1]  
-					i--
-				}
-				
-			}
-			
-
+			domains[i] = domains[len(domains) - 1]
+			domains = domains[:len(domains)-1]  
+			i--
 		}
 	}
 
+
 	servers, _ := services.GetServersByDomain(json.DomainId)
+	fmt.Println(selectedDomain.Label)
 	return c.Render("peers_manager", fiber.Map{"servers": servers, "domains":domains, "selected_domain": selectedDomain})
 }
 

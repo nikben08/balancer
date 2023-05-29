@@ -3,7 +3,7 @@ $(document).ready(function(){
         let server_address = $("#serverAdress").val();
         let server_label = $("#serverLabel").val();
         let server_weight = $("#serverWeight").val();
-        let domain_id = $("#domainId").val();    
+        let domain_id = $("#domainSelect").val();    
         
         if (server_address.length == 0){
           $("#serverAdress").css('border', '2px solid red');
