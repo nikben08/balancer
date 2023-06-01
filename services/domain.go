@@ -5,6 +5,7 @@ import (
 	"balancer/repositories"
 	"bytes"
 	"net/http"
+	"errors"
 )
 
 func CreateDomain(domain models.Domain) error {
@@ -14,7 +15,7 @@ func CreateDomain(domain models.Domain) error {
 	}
 
 	// HTTP endpoint
-	posturl := "http://localhost:8083/add-domain"
+	posturl := "http://172.18.0.1:8083/add-domain"
 
 	// JSON body
 	body := []byte(`{"domain":"` + domain.Label + `"}`)
@@ -48,12 +49,16 @@ func GetAllDomains() ([]models.Domain, error) {
 }
 
 func DeleteDomain(domainId string) error {
+	servers, _ := repositories.GetServersByDomain(domainId)
+	if len(servers) != 0 {
+		return errors.New("To delete domain, delete domain's servers first")
+	}
 	domain, err := repositories.GetDomainById(domainId)
 	if err != nil {
 		panic(err)
 	}
 
-	posturl := "http://localhost:8083/delete-domain"
+	posturl := "http://172.18.0.1:8083/delete-domain"
 
 	// JSON body
 	body := []byte(`{"domain":"` + domain.Label + `"}`)

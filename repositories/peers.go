@@ -75,7 +75,7 @@ func GetServerById(serverId string) (models.Server, error) {
 	resp := []models.Server{}
 	for servers.Next() {
 		server := models.Server{}
-		err := servers.Scan(&server.Id, &server.Address, &server.Label, &server.Weight)
+		err := servers.Scan(&server.Id, &server.DomainId, &server.Address, &server.Label, &server.Weight)
 		if err != nil {
 			log.Fatal(err)
 		}

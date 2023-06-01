@@ -16,12 +16,9 @@ func CreateServer(server models.Server) error {
 	}
 
 	// HTTP endpoint
-	posturl := "http://localhost:8083/add-peer"
+	posturl := "http://172.18.0.1:8083/add-peer"
 	domain, _ := repositories.GetDomainById(server.DomainId)
 	// JSON body
-	fmt.Println(server.Address)
-	fmt.Println(server.Weight)
-	fmt.Println(domain.Label)
 	body := []byte(`{"address":"` + server.Address + `", "weight":"` + strconv.Itoa(server.Weight) + `", "domain":"` + domain.Label + `"}`)
 
 	// Create a HTTP post request
@@ -61,19 +58,16 @@ func GetServersByDomain(domainId string) ([]models.Server, error) {
 }
 
 func DeleteServer(serverId string) error {
+	fmt.Println(serverId)
 	server, err := repositories.GetServerById(serverId)
 	if err != nil {
 		panic(err)
 	}
 
-	posturl := "http://localhost:8083/delete-peer"
+	posturl := "http://172.18.0.1:8083/delete-peer"
 
-	domain, _ := repositories.GetDomainById(server.DomainId)
 	// JSON body
-	fmt.Println(server.Address)
-	fmt.Println(server.Weight)
-	fmt.Println(domain.Label)
-	body := []byte(`{"address":"` + server.Address + `", "weight":"` + strconv.Itoa(server.Weight) + `", "domain":"` + domain.Label + `"}`)
+	body := []byte(`{"address":"` + server.Address +`"}`)
 
 	// Create a HTTP post request
 	r, err := http.NewRequest("POST", posturl, bytes.NewBuffer(body))

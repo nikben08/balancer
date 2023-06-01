@@ -33,9 +33,12 @@
             <span class="navbar-text">
               <form action="peers_manager" method="post" id="selectDomainForm">
                 <select name="domain_id" class="form-select" id="domainSelect" aria-label="Default select example">
-                  <option value={{.selected_domain.Id}} selected>{{.selected_domain.Label}}</option>
-                  {{range .domains}}
-                    <option value={{.Id}}>{{.Label}}</option>
+                  {{range $index, $domain := .domains}}
+                    {{if eq $index 0}}
+                      <option value="{{$domain.Id}}" selected>{{$domain.Label}}</option>
+                    {{else}}
+                      <option value="{{$domain.Id}}">{{$domain.Label}}</option>
+                    {{end}}
                   {{end}}
                 </select>
               </form>
