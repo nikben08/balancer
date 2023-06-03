@@ -15,7 +15,7 @@ func CreateDomain(domain models.Domain) error {
 	}
 
 	// HTTP endpoint
-	posturl := "http://172.18.0.1:8083/add-domain"
+	posturl := "http://172.0.0.1:8083/add-domain"
 
 	// JSON body
 	body := []byte(`{"domain":"` + domain.Label + `"}`)
@@ -58,7 +58,7 @@ func DeleteDomain(domainId string) error {
 		panic(err)
 	}
 
-	posturl := "http://172.18.0.1:8083/delete-domain"
+	posturl := "http://172.0.0.1:8083/delete-domain"
 
 	// JSON body
 	body := []byte(`{"domain":"` + domain.Label + `"}`)

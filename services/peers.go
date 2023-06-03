@@ -16,7 +16,7 @@ func CreateServer(server models.Server) error {
 	}
 
 	// HTTP endpoint
-	posturl := "http://172.18.0.1:8083/add-peer"
+	posturl := "http://172.0.0.1:8083/add-peer"
 	domain, _ := repositories.GetDomainById(server.DomainId)
 	// JSON body
 	body := []byte(`{"address":"` + server.Address + `", "weight":"` + strconv.Itoa(server.Weight) + `", "domain":"` + domain.Label + `"}`)
@@ -64,7 +64,7 @@ func DeleteServer(serverId string) error {
 		panic(err)
 	}
 
-	posturl := "http://172.18.0.1:8083/delete-peer"
+	posturl := "http://172.0.0.1:8083/delete-peer"
 
 	// JSON body
 	body := []byte(`{"address":"` + server.Address +`"}`)
