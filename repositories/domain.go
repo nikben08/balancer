@@ -3,7 +3,6 @@ package repositories
 import (
 	"balancer/models"
 	"log"
-
 	"github.com/google/uuid"
 )
 
@@ -61,6 +60,33 @@ func GetDomainById(domainId string) (models.Domain, error) {
 		log.Fatal(err)
 	}
 	return resp[0], nil
+}
+
+func WhetherDomainExists(domainLabel string) (bool, error) {
+	domains, err := DB.Query("SELECT * FROM `domains` WHERE label='" + domainLabel + "'")
+	if err != nil {
+		return false, err
+	}
+
+	resp := []models.Domain{}
+	for domains.Next() {
+		domain := models.Domain{}
+		err := domains.Scan(&domain.Id, &domain.Label)
+		if err != nil {
+			log.Fatal(err)
+		}
+		resp = append(resp, domain)
+	}
+
+	err = domains.Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	if len(resp) == 0 {
+		return false, nil
+	}
+	return true, nil
 }
 
 func DeleteDomain(domainId string) error {

@@ -9,13 +9,18 @@ import (
 )
 
 func CreateDomain(domain models.Domain) error {
-	err := repositories.CreateDomain(domain)
-	if err != nil {
-		return err
+	whetherDomainExists, err := repositories.WhetherDomainExists(domain.Label)
+	if !whetherDomainExists{  
+		err := repositories.CreateDomain(domain)
+		if err != nil {
+			return err
+		}
+	}else{
+		return errors.New("Domain already exists")
 	}
 
 	// HTTP endpoint
-	posturl := "http://172.0.0.1:8083/add-domain"
+	posturl := "http://127.0.0.1:8083/add-domain"
 
 	// JSON body
 	body := []byte(`{"domain":"` + domain.Label + `"}`)
@@ -58,7 +63,7 @@ func DeleteDomain(domainId string) error {
 		panic(err)
 	}
 
-	posturl := "http://172.0.0.1:8083/delete-domain"
+	posturl := "http://127.0.0.1:8083/delete-domain"
 
 	// JSON body
 	body := []byte(`{"domain":"` + domain.Label + `"}`)
